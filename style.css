@@ -404,3 +404,29 @@ select.form-control {
 .animate-in {
     animation: fadeIn 0.5s ease-out forwards;
 }
+
+/* Footer */
+.footer {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1.5rem;
+}
+
+.footer p {
+    margin-bottom: 0.3rem;
+}
+
+.footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
