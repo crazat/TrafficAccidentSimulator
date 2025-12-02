@@ -16,6 +16,37 @@ function toggleTip() {
     tipBox.classList.toggle('hidden');
 }
 
+function applyDailyWage() {
+    // 2023년 하반기/2024년 기준 도시일용노임 (약 118,000원 적용)
+    document.getElementById('dailyIncome').value = 118000;
+    // 시각적 피드백
+    const btn = document.querySelector('.btn-small');
+    const originalText = btn.textContent;
+    btn.textContent = "적용됨!";
+    setTimeout(() => btn.textContent = originalText, 1000);
+}
+
+function saveResultImage() {
+    const resultSection = document.querySelector('.result-section');
+
+    // 버튼 숨기고 캡처
+    document.getElementById('btnSave').style.display = 'none';
+
+    html2canvas(resultSection, {
+        backgroundColor: '#1e293b', // 캡처 시 배경색 지정 (투명 방지)
+        scale: 2 // 고화질
+    }).then(canvas => {
+        // 이미지 다운로드
+        const link = document.createElement('a');
+        link.download = '교통사고_합의금_계산결과.png';
+        link.href = canvas.toDataURL();
+        link.click();
+
+        // 버튼 다시 표시
+        document.getElementById('btnSave').style.display = 'flex';
+    });
+}
+
 function toggleUserInsurance() {
     const fault = parseInt(faultRatioInput.value) || 0;
     if (fault > 0) {
@@ -165,4 +196,7 @@ function calculateSettlement() {
     } else {
         surchargeSection.classList.add('hidden');
     }
+
+    // 저장 버튼 표시
+    document.getElementById('btnSave').classList.remove('hidden');
 }
