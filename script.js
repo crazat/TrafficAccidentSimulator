@@ -17,20 +17,33 @@ function toggleTip() {
 }
 
 function applyDailyWage() {
-    // 2023년 하반기/2024년 기준 도시일용노임 (약 118,000원 적용)
-    document.getElementById('dailyIncome').value = 118000;
-    // 시각적 피드백
+    const input = document.getElementById('dailyIncome');
     const btn = document.querySelector('.btn-small');
-    const originalText = btn.textContent;
-    btn.textContent = "적용됨!";
-    setTimeout(() => btn.textContent = originalText, 1000);
+
+    // 2023/2024 기준 도시일용노임: 118,000원
+    if (parseInt(input.value) === 118000) {
+        // 이미 적용된 상태면 취소 (기본값 70,000원으로 복귀 - 최저시급 기준)
+        input.value = 70000;
+        if (btn) {
+            btn.textContent = "취소됨 (기본값)";
+            setTimeout(() => btn.textContent = "주부/학생/무직 (소득증빙 어려움)", 1000);
+        }
+    } else {
+        // 적용
+        input.value = 118000;
+        if (btn) {
+            btn.textContent = "적용됨 (118,000원)";
+            setTimeout(() => btn.textContent = "주부/학생/무직 (소득증빙 어려움)", 1000);
+        }
+    }
 }
 
 function saveResultImage() {
     const resultSection = document.querySelector('.result-section');
+    const btnSave = document.getElementById('btnSave');
 
     // 버튼 숨기고 캡처
-    document.getElementById('btnSave').style.display = 'none';
+    if (btnSave) btnSave.style.display = 'none';
 
     html2canvas(resultSection, {
         backgroundColor: '#1e293b', // 캡처 시 배경색 지정 (투명 방지)
@@ -43,7 +56,7 @@ function saveResultImage() {
         link.click();
 
         // 버튼 다시 표시
-        document.getElementById('btnSave').style.display = 'flex';
+        if (btnSave) btnSave.style.display = 'flex';
     });
 }
 
@@ -192,11 +205,12 @@ function calculateSettlement() {
 
         // 할증 안내 문구 구체화
         const surchargeTitle = surchargeSection.querySelector('.surcharge-title span');
-        surchargeTitle.textContent = "⚠️ 보험료 할증 예상 (합의금 수령 시)";
+        if (surchargeTitle) surchargeTitle.textContent = "⚠️ 보험료 할증 예상 (합의금 수령 시)";
     } else {
         surchargeSection.classList.add('hidden');
     }
 
     // 저장 버튼 표시
-    document.getElementById('btnSave').classList.remove('hidden');
+    const btnSave = document.getElementById('btnSave');
+    if (btnSave) btnSave.classList.remove('hidden');
 }
