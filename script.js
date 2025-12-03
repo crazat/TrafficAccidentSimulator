@@ -46,7 +46,7 @@ function saveResultImage() {
     if (btnSave) btnSave.style.display = 'none';
 
     html2canvas(resultSection, {
-        backgroundColor: '#1e293b', // 캡처 시 배경색 지정 (투명 방지)
+        backgroundColor: '#0f172a', // Christmas theme dark background
         scale: 2 // 고화질
     }).then(canvas => {
         // 이미지 다운로드

@@ -1,17 +1,27 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #4f46e5;
-    --primary-hover: #4338ca;
-    --accent-color: #10b981;
+    /* Christmas Palette */
+    --primary-color: #D42426;
+    /* Santa Red */
+    --primary-hover: #B91C1C;
+    --accent-color: #FBBF24;
+    /* Gold */
+    --accent-hover: #D97706;
     --danger-color: #ef4444;
     --warning-color: #f59e0b;
-    --bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+
+    /* Snowy Night Gradient */
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+
     --glass-bg: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
     --text-main: #ffffff;
-    --text-muted: #94a3b8;
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-muted: #cbd5e1;
+    --card-bg: rgba(15, 23, 42, 0.6);
+
+    --christmas-green: #15803d;
 }
 
 * {
@@ -30,21 +40,70 @@ body {
     align-items: center;
     padding: 2rem;
     line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Snow Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: snow 4s linear infinite;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+@keyframes snow {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 200px;
+    }
 }
 
 .container {
     width: 100%;
     max-width: 1000px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
     padding: 2.5rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 36, 38, 0.1);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Decorative border top */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--christmas-green));
+    border-radius: 24px 24px 0 0;
 }
 
 /* Mobile Responsiveness Fix */
@@ -61,7 +120,6 @@ body {
 
     .form-row {
         grid-template-columns: 1fr !important;
-        /* Force stack on mobile */
         gap: 1rem;
     }
 
@@ -82,13 +140,17 @@ body {
 }
 
 .header h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-family: 'Pretendard', sans-serif;
+    /* Keep readable font for main title, maybe use decorative for accents */
+    font-size: 2.2rem;
+    font-weight: 800;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #818cf8, #c084fc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .header p {
@@ -120,7 +182,7 @@ body {
 }
 
 .form-control {
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     padding: 0.75rem 1rem;
@@ -133,13 +195,13 @@ body {
 
 .form-control:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
 }
 
 select.form-control {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23fbbf24' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
     background-position: right 0.5rem center;
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
@@ -158,13 +220,14 @@ select.form-control {
 
 /* Result Section */
 .result-section {
-    background: var(--card-bg);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 16px;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     border: 1px solid var(--glass-border);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .total-display {
@@ -183,7 +246,7 @@ select.form-control {
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--accent-color);
-    text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
 }
 
 .breakdown-list {
@@ -204,7 +267,7 @@ select.form-control {
 }
 
 .advice-box {
-    background: rgba(79, 70, 229, 0.1);
+    background: rgba(212, 36, 38, 0.1);
     border-left: 4px solid var(--primary-color);
     padding: 1rem;
     border-radius: 0 8px 8px 0;
@@ -225,7 +288,7 @@ select.form-control {
 .surcharge-box {
     margin-top: 1rem;
     padding: 1rem;
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 12px;
     border: 1px solid var(--glass-border);
 }
@@ -255,21 +318,33 @@ select.form-control {
 .btn-calc {
     width: 100%;
     padding: 1rem;
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), #b91c1c);
     color: white;
     border: none;
     border-radius: 12px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
     margin-top: auto;
+    box-shadow: 0 4px 12px rgba(212, 36, 38, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-calc::after {
+    content: '🎁';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.8;
 }
 
 .btn-calc:hover {
-    background: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px -10px var(--primary-color);
+    box-shadow: 0 8px 20px rgba(212, 36, 38, 0.6);
 }
 
 /* Small Button (Daily Wage) */
@@ -287,14 +362,14 @@ select.form-control {
 
 .btn-small:hover {
     background: var(--accent-color);
-    color: white;
+    color: #000;
 }
 
 /* Save Button */
 .btn-save {
     width: 100%;
     padding: 0.8rem;
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(251, 191, 36, 0.1);
     border: 1px solid var(--accent-color);
     color: var(--accent-color);
     border-radius: 12px;
@@ -311,13 +386,13 @@ select.form-control {
 
 .btn-save:hover {
     background: var(--accent-color);
-    color: white;
+    color: #000;
 }
 
 /* Tip Box */
 .btn-tip {
     background: var(--accent-color);
-    color: white;
+    color: #000;
     border: none;
     border-radius: 50%;
     width: 20px;
@@ -337,7 +412,7 @@ select.form-control {
 }
 
 .tip-box {
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(251, 191, 36, 0.05);
     border: 1px solid var(--accent-color);
     border-radius: 12px;
     padding: 1.25rem;
@@ -373,11 +448,10 @@ select.form-control {
 }
 
 .tip-content li::before {
-    content: "•";
-    color: var(--accent-color);
+    content: "🎄";
+    font-size: 0.8rem;
     position: absolute;
     left: 0;
-    font-weight: bold;
 }
 
 .tip-note {
