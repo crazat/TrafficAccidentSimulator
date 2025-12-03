@@ -432,7 +432,7 @@ select.form-control {
     font-size: 0.95rem;
     color: white;
     margin-bottom: 0.5rem;
-}
+    }
 
 .tip-content ul {
     list-style-type: none;
@@ -503,4 +503,17 @@ select.form-control {
 .footer a:hover {
     color: var(--accent-color);
     text-decoration: underline;
+}
+
+.mobile-text {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-text {
+        display: none;
+    }
+    .mobile-text {
+        display: inline;
+    }
 }
