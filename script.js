@@ -10,10 +10,55 @@ const premiumSection = document.getElementById('premiumSection');
 
 // Event Listeners
 faultRatioInput.addEventListener('input', toggleUserInsurance);
+document.getElementById('injuryGrade').addEventListener('change', updateFutureTreatmentTip);
 
 function toggleTip() {
     const tipBox = document.getElementById('futureTreatmentTip');
+    updateFutureTreatmentTip(); // Ensure content is correct before showing
     tipBox.classList.toggle('hidden');
+}
+
+function updateFutureTreatmentTip() {
+    const injuryGrade = document.getElementById('injuryGrade').value;
+    const tipContent = document.querySelector('#futureTreatmentTip .tip-content');
+    const tipTitle = document.querySelector('#futureTreatmentTip h3');
+    const tipIntro = document.querySelector('#futureTreatmentTip > p');
+
+    if (injuryGrade === 'serious') {
+        // 중상 (11급 이상 / 골절)
+        tipTitle.textContent = "💡 중상(골절 등) 향후치료비 핵심";
+        tipIntro.innerHTML = `<strong>향후치료비란?</strong> 합의 이후 발생할 치료비입니다. 중상(골절 등)의 경우 <strong>단순 협상이 아닌, 의학적 소견(추정서)에 의해 산정</strong>되는 것이 원칙입니다.`;
+
+        tipContent.innerHTML = `
+            <h4>협상 전략 (의학적 근거 필수):</h4>
+            <ul>
+                <li><strong>향후치료비 추정서 발급:</strong> 주치의가 작성한 '향후치료비 추정서'가 절대적인 기준이 됩니다.</li>
+                <li><strong>주요 인정 항목:</strong>
+                    <ul>
+                        <li>핀 제거 수술비 (금속 내고정물 제거)</li>
+                        <li>흉터 성형 수술비 (반흔 성형술)</li>
+                        <li>재활 치료비 (도수치료 등 비급여 항목 포함 가능성)</li>
+                    </ul>
+                </li>
+                <li><strong>주의사항:</strong> 섣불리 합의하기보다, 핀 제거 시기나 치료 종결 시점에 맞춰 정확한 견적을 받는 것이 유리합니다.</li>
+            </ul>
+            <p class="tip-note">※ 골절 환자는 수백만 원 단위의 핀 제거/성형 비용이 발생하므로, 단순 위로금 명목으로 합의하면 손해를 볼 수 있습니다.</p>
+        `;
+    } else {
+        // 경상 (12~14급) - 기본값
+        tipTitle.textContent = "💡 향후치료비 협상 꿀팁";
+        tipIntro.innerHTML = `<strong>향후치료비란?</strong> 합의 이후에 발생할 것으로 예상되는 치료비를 미리 당겨서 받는 금액입니다. 정해진 공식이 없어 <strong>가장 유연하게 협상할 수 있는 항목</strong>입니다.`;
+
+        tipContent.innerHTML = `
+            <h4>협상 전략:</h4>
+            <ul>
+                <li><strong>구체적인 치료 계획 제시:</strong> "아직 통증이 심해 3주 이상 물리치료와 약침 치료가 더 필요하다"고 구체적으로 어필하세요.</li>
+                <li><strong>고가 검사/치료 언급:</strong> "통증이 지속되면 MRI 촬영이나 추나요법을 받을 예정이다"라고 하면, 보험사는 이를 방어하기 위해 합의금을 높일 수 있습니다.</li>
+                <li><strong>심리적 우위:</strong> "지금 합의 안 하고 치료를 더 받겠다"는 태도는 보험사 입장에서 관리 비용 증가로 이어지므로 강력한 협상 카드가 됩니다.</li>
+            </ul>
+            <p class="tip-note">※ 통상적으로 경상 환자의 경우 30~50만원에서 시작하여, 협상 능력에 따라 100만원 이상으로 책정되기도 합니다.</p>
+        `;
+    }
 }
 
 function applyDailyWage() {
