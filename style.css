@@ -432,7 +432,7 @@ select.form-control {
     font-size: 0.95rem;
     color: white;
     margin-bottom: 0.5rem;
-    }
+}
 
 .tip-content ul {
     list-style-type: none;
@@ -504,16 +504,13 @@ select.form-control {
     color: var(--accent-color);
     text-decoration: underline;
 }
-
-.mobile-text {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .desktop-text {
-        display: none;
-    }
-    .mobile-text {
-        display: inline;
-    }
+.guidance-text {
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(251, 191, 36, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    animation: fadeIn 0.3s ease;
 }
