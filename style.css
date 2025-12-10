@@ -512,6 +512,7 @@ select.form-control {
     margin-right: 8px;
     border-radius: 4px;
     transform: translateY(-1px);
+    mix-blend-mode: screen;
 
 }
 
