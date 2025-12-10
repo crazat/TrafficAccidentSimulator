@@ -299,3 +299,27 @@ function calculateSettlement() {
     const btnSave = document.getElementById('btnSave');
     if (btnSave) btnSave.classList.remove('hidden');
 }
+
+// Modal Functions
+function openLogoModal() {
+    const modal = document.getElementById('logoModal');
+    modal.classList.remove('hidden');
+    // Force reflow to enable transition
+    void modal.offsetWidth;
+    modal.classList.add('show');
+}
+
+function closeLogoModal() {
+    const modal = document.getElementById('logoModal');
+    modal.classList.remove('show');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300); // Wait for transition to finish
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function (event) {
+    if (event.key === "Escape") {
+        closeLogoModal();
+    }
+});

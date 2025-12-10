@@ -165,8 +165,21 @@
         </div>
 
         <div class="footer">
-            <p>Developer: 한정우 | <a href="mailto:crazat@naver.com">crazat@naver.com</a></p>
-            <p>개선사항이 있으면 말씀 부탁드립니다.</p>
+            <div class="developer-info" onclick="openLogoModal()">
+                <img src="logo_transparent_v3.png" alt="Han Predict Logo" class="developer-logo">
+                <span>Developer: 한정우 | <a href="mailto:crazat@naver.com"
+                        onclick="event.stopPropagation()">crazat@naver.com</a></span>
+            </div>
+
+            <p>개선사항이 있으면 말씀 부탁드립니다</p>
+        </div>
+    </div>
+
+    <!-- Logo Modal -->
+    <div id="logoModal" class="modal hidden" onclick="closeLogoModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="closeLogoModal()">&times;</span>
+            <img src="logo_clean.png" alt="Original Logo" class="modal-image">
         </div>
     </div>
 

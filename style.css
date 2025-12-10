@@ -504,6 +504,17 @@ select.form-control {
     color: var(--accent-color);
     text-decoration: underline;
 }
+
+.developer-logo {
+    height: 32px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 8px;
+    border-radius: 4px;
+    transform: translateY(-1px);
+
+}
+
 .guidance-text {
     font-size: 0.85rem;
     color: var(--accent-color);
@@ -513,4 +524,84 @@ select.form-control {
     border-radius: 8px;
     border: 1px solid rgba(251, 191, 36, 0.2);
     animation: fadeIn 0.3s ease;
+}
+
+.developer-info {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.developer-info:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    background-color: transparent;
+    padding: 0;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal:hover {
+    color: var(--accent-color);
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
