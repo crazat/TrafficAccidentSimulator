@@ -606,3 +606,17 @@ select.form-control {
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+.disclaimer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    border: 1px solid var(--glass-border);
+}
+
+.disclaimer strong {
+    color: var(--warning-color);
+}

@@ -206,7 +206,7 @@ function calculateSettlement() {
         faultDeduction = 0;
     } else if (opponentInsurance === 'liability') {
         // 상대방 책임보험 (로직은 아래에서 별도 처리)
-        advice = "<strong>[상대방 책임보험]</strong><br>주의하세요! 상대방이 책임보험만 가입했습니다. 경상 기준 총 한도(치료비+합의금)가 120만원입니다.";
+        advice = "<strong>[상대방 책임보험]</strong><br>참고: 상대방이 책임보험만 가입한 경우입니다. 경상 기준 총 한도(치료비+합의금)가 120만원입니다.";
         adviceClass = "advice-box danger";
     } else {
         // 차대차 사고 (일반)
@@ -220,7 +220,7 @@ function calculateSettlement() {
             const netBenefit = finalAmount - surchargeTotal;
 
             if (myInsurance === 'jasang') {
-                advice = "<strong>[자동차상해(자상) 가입자]</strong><br>본인 과실이 있어도 치료비와 합의금이 모두 보장됩니다.<br><strong>'치료비가 늘어나면 합의금이 줄어든다'는 말은 거짓입니다!</strong><br>충분히 치료받으시고 합의하셔도 됩니다.<br><br>단, <strong>합의금을 받으면 보험료가 할증</strong>됩니다. 아래 '실익 계산'을 확인하세요.";
+                advice = "<strong>[자동차상해(자상) 가입자]</strong><br>본인 과실이 있어도 치료비와 합의금이 모두 보장됩니다.<br><strong>'치료비가 늘어나면 합의금이 줄어든다'는 말은 사실과 다를 수 있습니다.</strong><br>충분히 치료받으시고 합의하셔도 됩니다.<br><br>단, <strong>합의금을 받으면 보험료가 할증</strong>됩니다. 아래 '실익 계산'을 확인하세요.";
                 faultDeduction = 0;
             } else if (myInsurance === 'jason') {
                 advice = "<strong>[자기신체사고(자손) 가입자]</strong><br>치료비는 보장되나, <strong>합의금은 본인 과실 비율만큼 차감(감가)</strong>되어 산정됩니다.<br>(예: 과실 90%여도 약 300만원까지는 치료비 보장)<br><br><strong>합의금을 받으면 보험료가 할증</strong>됩니다. 아래 '실익 계산'을 확인하세요.";
@@ -234,10 +234,10 @@ function calculateSettlement() {
 
             // 실익에 따른 추가 조언
             if (netBenefit < 0) {
-                advice += `<br><br><strong>💡 추천 전략: 합의금 포기 (치료만 받기)</strong><br>예상 합의금(${formatCurrency(finalAmount)})보다 보험료 할증(${formatCurrency(surchargeTotal)})이 더 큽니다.<br><strong>합의금을 안 받고 치료만(120만원 한도 내) 받으면 할증되지 않습니다.</strong>`;
+                advice += `<br><br><strong>💡 참고 시나리오: 합의금 포기 고려</strong><br>예상 합의금(${formatCurrency(finalAmount)})보다 보험료 할증(${formatCurrency(surchargeTotal)})이 더 클 수 있습니다.<br><strong>일반적으로 합의금을 받지 않고 치료만(120만원 한도 내) 받으면 할증되지 않는 경우가 많습니다.</strong>`;
                 adviceClass = "advice-box warning";
             } else {
-                advice += `<br><br><strong>💡 추천 전략: 합의 진행</strong><br>할증(${formatCurrency(surchargeTotal)})을 고려해도 합의금을 받는 것이 ${formatCurrency(netBenefit)} 더 이득입니다.<br>(치료도 받고 합의금도 챙기세요!)`;
+                advice += `<br><br><strong>💡 참고 시나리오: 합의 진행 고려</strong><br>할증(${formatCurrency(surchargeTotal)})을 고려해도 합의금을 받는 것이 ${formatCurrency(netBenefit)} 유리할 수 있습니다.<br>(치료도 받고 합의금도 챙기세요!)`;
             }
         }
     }
@@ -251,7 +251,7 @@ function calculateSettlement() {
         if (remainingLimit < 0) {
             // 한도 초과
             finalAmount = 0; // 합의금 없음 (치료비로 다 씀)
-            advice = "<strong>[책임보험 한도 초과]</strong><br>치료비가 책임보험 한도(120만원)를 초과했습니다. 상대방 보험사에서는 더 이상 보상받을 수 없습니다.<br><br><strong>💡 해결책:</strong> 본인의 <strong>'무보험차상해'</strong>나 <strong>'자상/자손'</strong>으로 처리하세요. 내 보험사가 먼저 보상하고 상대방에게 구상권을 청구합니다. 이 경우에도 합의금 산정이 가능합니다!";
+            advice = "<strong>[책임보험 한도 초과]</strong><br>치료비가 책임보험 한도(120만원)를 초과했습니다. 상대방 보험사에서는 더 이상 보상받을 수 없습니다.<br><br><strong>💡 일반적인 처리 방법:</strong> 본인의 <strong>'무보험차상해'</strong>나 <strong>'자상/자손'</strong>으로 처리를 고려해보세요. 내 보험사가 먼저 보상하고 상대방에게 구상권을 청구합니다. 이 경우에도 합의금 산정이 가능합니다!";
             adviceClass = "advice-box danger";
         } else {
             // 한도 내
