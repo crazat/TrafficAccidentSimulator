@@ -12,6 +12,18 @@ const premiumSection = document.getElementById('premiumSection');
 faultRatioInput.addEventListener('input', toggleUserInsurance);
 document.getElementById('injuryGrade').addEventListener('change', updateFutureTreatmentTip);
 
+// Set responsive default message on page load
+function setDefaultAdviceMessage() {
+    const adviceBox = document.getElementById('adviceBox');
+    const isMobile = window.innerWidth <= 768;
+    const direction = isMobile ? '상단' : '좌측';
+    adviceBox.innerHTML = `${direction} 정보를 입력하고 계산하기를 눌러주세요.`;
+}
+
+// Initialize on page load
+setDefaultAdviceMessage();
+window.addEventListener('resize', setDefaultAdviceMessage);
+
 function toggleTip() {
     const tipBox = document.getElementById('futureTreatmentTip');
     updateFutureTreatmentTip(); // Ensure content is correct before showing

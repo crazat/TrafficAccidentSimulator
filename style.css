@@ -620,3 +620,13 @@ select.form-control {
 .disclaimer strong {
     color: var(--warning-color);
 }
+
+
+/* Responsive text for mobile/desktop */
+.desktop-text { display: inline; }
+.mobile-text { display: none; }
+
+@media (max-width: 768px) {
+    .desktop-text { display: none; }
+    .mobile-text { display: inline; }
+}
